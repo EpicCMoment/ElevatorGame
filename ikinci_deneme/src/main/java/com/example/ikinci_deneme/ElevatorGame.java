@@ -14,8 +14,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static javafx.application.Application.launch;
 
@@ -26,6 +36,11 @@ public class ElevatorGame extends Application {
     }
 
     public void start(Stage window) {
+
+        Text t = new Text (10, 20, "This is a text sample");
+        t.setText("This is a text sample");
+        t.setFont(Font.font ("Verdana", 20));
+        t.setFill(Color.RED);
 
         Elevator elevator = new Elevator(4, 0, 5);
 
@@ -38,14 +53,16 @@ public class ElevatorGame extends Application {
         message.setLayoutY(200);
         message.setLayoutX(450);
 
+
+
         // Image of the building and all the adjustments
-        ImageView buildingImage = new ImageView("C:\\Users\\Rudrik\\IdeaProjects\\ikinci_deneme\\src\\main\\java\\com\\example\\ikinci_deneme\\building.png");
+        ImageView buildingImage = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/building.png");
         buildingImage.setFitWidth(400);
         buildingImage.setFitHeight(800);
         buildingImage.setLayoutX(20);
 
         // elevator image which moves
-        ImageView elevatorImage = new ImageView("C:\\Users\\Rudrik\\IdeaProjects\\ikinci_deneme\\src\\main\\java\\com\\example\\ikinci_deneme\\elevator.png");
+        ImageView elevatorImage = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/elevator.png");
         elevatorImage.setFitHeight(100);
         elevatorImage.setFitWidth(100);
         elevatorImage.setLayoutX(173);
@@ -79,7 +96,7 @@ public class ElevatorGame extends Application {
         personNameText.setLayoutX(lastPersonText.getLayoutX());
         personNameText.setLayoutY(currentFloorText.getLayoutY() + 30);
 
-        ImageView upArrow = new ImageView("C:\\Users\\Rudrik\\IdeaProjects\\ikinci_deneme\\src\\main\\java\\com\\example\\ikinci_deneme\\up_arrow.png");
+        ImageView upArrow = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/up_arrow.png");
         upArrow.setFitWidth(30);
         upArrow.setFitHeight(30);
 
@@ -118,7 +135,7 @@ public class ElevatorGame extends Application {
         });
 
 
-        ImageView downArrow = new ImageView("C:\\Users\\Rudrik\\IdeaProjects\\ikinci_deneme\\src\\main\\java\\com\\example\\ikinci_deneme\\down_arrow.png");
+        ImageView downArrow = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/down_arrow.png");
         downArrow.setFitWidth(30);
         downArrow.setFitHeight(30);
 
@@ -217,7 +234,7 @@ public class ElevatorGame extends Application {
 
 
         window.setResizable(false);
-        window.getIcons().add(new Image("C:\\Users\\Rudrik\\IdeaProjects\\ikinci_deneme\\src\\main\\java\\com\\example\\ikinci_deneme\\icon.png"));
+        window.getIcons().add(new Image("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/icon.png"));
 
         window.setScene(sc);
 
