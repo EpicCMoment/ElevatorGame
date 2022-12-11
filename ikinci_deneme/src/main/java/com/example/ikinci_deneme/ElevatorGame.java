@@ -1,31 +1,17 @@
 package com.example.ikinci_deneme;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static javafx.application.Application.launch;
 
@@ -35,53 +21,119 @@ public class ElevatorGame extends Application {
         launch(args);
     }
 
-    public void start(Stage window) {
+    public void start(Stage mainWindow) {
 
-        Text t = new Text (10, 20, "This is a text sample");
-        t.setText("This is a text sample");
-        t.setFont(Font.font ("Verdana", 20));
-        t.setFill(Color.RED);
+        /*
+        For every couple function;
+        1-) Set the image
+        2-) Set the actual object
 
-        Elevator elevator = new Elevator(4, 0, 5);
+        Correct usage:
+            setElevatorImage();
+            setElevator();
 
-        double betweenFloorSpace = 128;
+        Incorrect usage:
+            setElevator();
+            setElevatorImage();
+         */
 
-        Pane p = new Pane();
+        // don't change the order of the function calls below
+        // if you are NOT SURE about what are you doing
 
-        TextField message = new TextField();
-        message.setEditable(false);
-        message.setLayoutX(460);
-        message.setLayoutY(265);
-        message.setMaxWidth(210);
-        message.setMinWidth(210);
+        setBuildingImage();
+
+        setElevatorImage();
+        setElevator();
+
+        setInformationMessageText();
+
+        setLastPersonInTheElevatorText();
+
+        setCurrentFloorText();
+
+        setPersonNameText();
+
+        setElevatorUpButtonImage();
+        setElevatorUpButton();
+
+        setElevatorDownButtonImage();
+        setElevatorDownButton();
+
+        setNewPersonNameText();
+        setNewPersonTargetText();
+        setAddNewPersonButton();
 
 
+        setMainBackground();
+        setMainLayout();
+        setMainWindow(mainWindow);
+
+        mainWindow.show();
 
 
-        // Image of the building and all the adjustments
-        ImageView buildingImage = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/building.png");
+    }
+
+    Elevator elevator;
+    Pane mainBackground;
+    TextField informationMessageText;
+    ImageView buildingImage;
+    ImageView elevatorImage;
+    TextField lastPersonInTheElevatorText;
+    TextField currentFloorText;
+    TextField personNameText;
+    ImageView elevatorUpButtonImage;
+    Button elevatorUpButton;
+    ImageView elevatorDownButtonImage;
+    Button elevatorDownButton;
+    TextField newPersonNameText;
+    TextField newPersonTargetText;
+    Button addNewPersonButton;
+    Scene mainLayout;
+
+    double betweenFloorSpace = 128;
+
+    public void setElevator() {
+        elevator = new Elevator(4, 0, 5);
+    }
+
+    public void setInformationMessageText() {
+        informationMessageText = new TextField();
+        informationMessageText.setEditable(false);
+        informationMessageText.setLayoutX(460);
+        informationMessageText.setLayoutY(265);
+        informationMessageText.setMaxWidth(210);
+        informationMessageText.setMinWidth(210);
+    }
+
+    public void setBuildingImage() {
+        String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/building.png";
+        buildingImage = new ImageView(imagePath);
         buildingImage.setFitWidth(400);
         buildingImage.setFitHeight(800);
         buildingImage.setLayoutX(20);
+    }
 
-        // elevator image which moves
-        ImageView elevatorImage = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/elevator.png");
+    public void setElevatorImage() {
+        String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/elevator.png";
+        elevatorImage = new ImageView(imagePath);
         elevatorImage.setFitHeight(100);
         elevatorImage.setFitWidth(100);
         elevatorImage.setLayoutX(173);
         elevatorImage.setLayoutY(700);
+    }
 
-        // textfield that shows the available person in the elevator to get out
-        TextField lastPersonText = new TextField();
-        lastPersonText.setAlignment(Pos.CENTER);
-        lastPersonText.setMaxWidth(90);
-        lastPersonText.setMinWidth(90);
-        lastPersonText.setEditable(false);
-        lastPersonText.setLayoutX(message.getLayoutX() + 120);
-        lastPersonText.setLayoutY(message.getLayoutY() + 60);
+    public void setLastPersonInTheElevatorText() {
+        lastPersonInTheElevatorText = new TextField();
+        lastPersonInTheElevatorText.setAlignment(Pos.CENTER);
+        lastPersonInTheElevatorText.setMaxWidth(90);
+        lastPersonInTheElevatorText.setMinWidth(90);
+        lastPersonInTheElevatorText.setEditable(false);
+        lastPersonInTheElevatorText.setLayoutX(informationMessageText.getLayoutX() + 120);
+        lastPersonInTheElevatorText.setLayoutY(informationMessageText.getLayoutY() + 60);
+    }
 
-        // textfield that shows current floor elevator is sitting at
-        TextField currentFloorText = new TextField();
+    public void setCurrentFloorText() {
+        currentFloorText = new TextField();
         currentFloorText.setAlignment(Pos.CENTER);
         currentFloorText.setText("0");
         currentFloorText.setMaxWidth(25);
@@ -91,34 +143,36 @@ public class ElevatorGame extends Application {
         currentFloorText.setEditable(false);
         currentFloorText.setLayoutX(elevatorImage.getLayoutX() + 38);
         currentFloorText.setLayoutY(elevatorImage.getLayoutY() + 5);
+    }
 
-        // textfield that shows current floor elevator is sitting at
-        TextField personNameText = new TextField();
+    public void setPersonNameText() {
+        personNameText = new TextField();
         personNameText.setAlignment(Pos.CENTER);
         personNameText.setMaxWidth(90);
         personNameText.setMinWidth(90);
         personNameText.setEditable(false);
-        personNameText.setLayoutX(lastPersonText.getLayoutX());
-        personNameText.setLayoutY(lastPersonText.getLayoutY() + 30);
+        personNameText.setLayoutX(lastPersonInTheElevatorText.getLayoutX());
+        personNameText.setLayoutY(lastPersonInTheElevatorText.getLayoutY() + 30);
+    }
 
-        ImageView upArrow = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/up_arrow.png");
-        upArrow.setFitWidth(30);
-        upArrow.setFitHeight(30);
+    public void setElevatorUpButtonImage() {
+        String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/up_arrow.png";
+        elevatorUpButtonImage = new ImageView(imagePath);
+        elevatorUpButtonImage.setFitWidth(30);
+        elevatorUpButtonImage.setFitHeight(30);
+    }
 
-        // up button
-        Button upButton = new Button();
-        upButton.setGraphic(upArrow);
-        upButton.setLayoutX(message.getLayoutX());
-        upButton.setLayoutY(message.getLayoutY() + 50);
+    public void setElevatorUpButton() {
+        elevatorUpButton = new Button();
+        elevatorUpButton.setGraphic(elevatorUpButtonImage);
+        elevatorUpButton.setLayoutX(informationMessageText.getLayoutX());
+        elevatorUpButton.setLayoutY(informationMessageText.getLayoutY() + 50);
 
-
-        upButton.setOnAction((e) -> {
+        elevatorUpButton.setOnAction((e) -> {
             if (elevator.getCurrentFloor() != elevator.getMaxFloor()) {
                 elevatorImage.setLayoutY(elevatorImage.getLayoutY() - betweenFloorSpace);
                 currentFloorText.setLayoutY(currentFloorText.getLayoutY() - betweenFloorSpace);
 
-                //Person pp = (Person)(elevator.getPeople().peek());
-                //String lastPersonName = pp.getName();
 
                 String lastPersonName;
                 if (!elevator.getPeople().isEmpty()) {
@@ -133,26 +187,29 @@ public class ElevatorGame extends Application {
                 int afterCapacity = elevator.getPeople().getSize();
 
                 if (afterCapacity != beforeCapacity) {
-                    message.setText(lastPersonName + " is fucked off.");
+                    informationMessageText.setText(lastPersonName + " is fucked off.");
                 }
 
                 currentFloorText.setText(Integer.toString(elevator.getCurrentFloor()));
             }
 
         });
+    }
 
+    public void setElevatorDownButtonImage() {
+        String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/down_arrow.png";
+        elevatorDownButtonImage = new ImageView(imagePath);
+        elevatorDownButtonImage.setFitWidth(30);
+        elevatorDownButtonImage.setFitHeight(30);
+    }
 
-        ImageView downArrow = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/down_arrow.png");
-        downArrow.setFitWidth(30);
-        downArrow.setFitHeight(30);
+    public void setElevatorDownButton() {
+        elevatorDownButton = new Button();
+        elevatorDownButton.setGraphic(elevatorDownButtonImage);
+        elevatorDownButton.setLayoutX(elevatorUpButton.getLayoutX());
+        elevatorDownButton.setLayoutY(elevatorUpButton.getLayoutY() + 45);
 
-        // down button
-        Button downButton = new Button();
-        downButton.setGraphic(downArrow);
-        downButton.setLayoutX(upButton.getLayoutX());
-        downButton.setLayoutY(upButton.getLayoutY() + 45);
-
-        downButton.setOnAction((e) -> {
+        elevatorDownButton.setOnAction((e) -> {
             if (elevator.getCurrentFloor() != elevator.getMinFloor()) {
                 elevatorImage.setLayoutY(elevatorImage.getLayoutY() + betweenFloorSpace);
                 currentFloorText.setLayoutY(currentFloorText.getLayoutY() + betweenFloorSpace);
@@ -171,7 +228,7 @@ public class ElevatorGame extends Application {
                 int afterCapacity = elevator.getPeople().getSize();
 
                 if (afterCapacity != beforeCapacity) {
-                    message.setText(lastPersonName + " is fucked off.");
+                    informationMessageText.setText(lastPersonName + " is fucked off.");
                 }
 
                 currentFloorText.setText(Integer.toString(elevator.getCurrentFloor()));
@@ -179,23 +236,24 @@ public class ElevatorGame extends Application {
             }
 
         });
+    }
 
-
-
-        // text field to get the new person's name
-        TextField newPersonNameText = new TextField();
+    public void setNewPersonNameText() {
+        newPersonNameText = new TextField();
         newPersonNameText.setPromptText("Name");
         newPersonNameText.setLayoutX(490);
         newPersonNameText.setLayoutY(475);
+    }
 
-        // text field to get the target floor of the new person
-        TextField newPersonTargetText = new TextField();
+    public void setNewPersonTargetText() {
+        newPersonTargetText = new TextField();
         newPersonTargetText.setPromptText("Target Floor");
         newPersonTargetText.setLayoutX(newPersonNameText.getLayoutX());
         newPersonTargetText.setLayoutY(newPersonNameText.getLayoutY() + 30);
+    }
 
-        // add the new person button
-        Button addNewPersonButton = new Button("Add");
+    public void setAddNewPersonButton() {
+        addNewPersonButton = new Button("Add");
         addNewPersonButton.setLayoutX(newPersonNameText.getLayoutX());
         addNewPersonButton.setLayoutY(newPersonTargetText.getLayoutY() + 30);
         addNewPersonButton.setPrefWidth(147);
@@ -211,7 +269,7 @@ public class ElevatorGame extends Application {
                 personNameText.setText(personName);
             } else {
                 if (elevator.getPeople().getSize() == elevator.getCapacity()) {
-                    message.setText("Elevator is full.");
+                    informationMessageText.setText("Elevator is full.");
                 } else {
                     elevator.enter(temp, personTarget);
                 }
@@ -222,32 +280,37 @@ public class ElevatorGame extends Application {
             newPersonTargetText.setText("");
 
         });
-
-
-        p.getChildren().add(buildingImage);
-        p.getChildren().add(lastPersonText);
-        p.getChildren().add(currentFloorText);
-        p.getChildren().add(upButton);
-        p.getChildren().add(downButton);
-        p.getChildren().add(elevatorImage);
-        p.getChildren().add(newPersonNameText);
-        p.getChildren().add(newPersonTargetText);
-        p.getChildren().add(addNewPersonButton);
-        p.getChildren().add(personNameText);
-        p.getChildren().add(message);
-
-        // kind of main window controls :S
-        Scene sc = new Scene(p, 700, 850);
-
-
-        window.setResizable(false);
-        window.getIcons().add(new Image("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/icon.png"));
-
-        window.setScene(sc);
-
-        window.show();
-
-
     }
+
+    public void setMainBackground() {
+        mainBackground = new Pane();
+        mainBackground.getChildren().add(buildingImage);
+        mainBackground.getChildren().add(lastPersonInTheElevatorText);
+        mainBackground.getChildren().add(currentFloorText);
+        mainBackground.getChildren().add(elevatorUpButton);
+        mainBackground.getChildren().add(elevatorDownButton);
+        mainBackground.getChildren().add(elevatorImage);
+        mainBackground.getChildren().add(newPersonNameText);
+        mainBackground.getChildren().add(newPersonTargetText);
+        mainBackground.getChildren().add(addNewPersonButton);
+        mainBackground.getChildren().add(personNameText);
+        mainBackground.getChildren().add(informationMessageText);
+    }
+
+    public void setMainLayout() {
+        mainLayout = new Scene(mainBackground, 700, 850);
+    }
+
+    public void setMainWindow(Stage mainWindow) {
+
+        String iconURL = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/icon.png";
+
+        mainWindow.setResizable(false);
+        mainWindow.getIcons().add(new Image(iconURL));
+
+        mainWindow.setScene(mainLayout);
+    }
+
+
 
 }
