@@ -324,9 +324,9 @@ public class ElevatorGame extends Application {
 
                 isEmpty = elevator.getPeople().isEmpty();
                 if (afterCapacity != beforeCapacity) {
-                    informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is out.\n");
+                    informationMessageArea.appendText(lastPersonName + " is out.\n");
                     if (isEmpty) {
-                        informationMessageArea.setText(informationMessageArea.getText() + "Elevator is empty.\n");
+                        informationMessageArea.appendText("Elevator is empty.\n");
                     }
                 }
 
@@ -382,9 +382,9 @@ public class ElevatorGame extends Application {
 
                 isEmpty = elevator.getPeople().isEmpty();
                 if (afterCapacity != beforeCapacity) {
-                    informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is out..\n");
+                    informationMessageArea.appendText(lastPersonName + " is out..\n");
                     if (isEmpty) {
-                        informationMessageArea.setText(informationMessageArea.getText() + "Elevator is empty.\n");
+                        informationMessageArea.appendText("Elevator is empty.\n");
                     }
                 }
 
@@ -440,7 +440,7 @@ public class ElevatorGame extends Application {
             try {
                 Integer.parseInt(newPersonTargetText.getText());
             } catch (Exception ep) {
-                informationMessageArea.setText(informationMessageArea.getText() + "Invalid target floor!\n");
+                informationMessageArea.appendText("Invalid target floor!\n");
                 newPersonNameText.setText("");
                 newPersonTargetText.setText("");
                 return;
@@ -448,7 +448,7 @@ public class ElevatorGame extends Application {
             personTarget = Integer.parseInt(newPersonTargetText.getText());
 
             if (personTarget > elevator.getMaxFloor() || personTarget < elevator.getMinFloor()) {
-                informationMessageArea.setText(informationMessageArea.getText() + "Invalid target floor!\n");
+                informationMessageArea.appendText("Invalid target floor!\n");
                 newPersonNameText.setText("");
                 newPersonTargetText.setText("");
                 return;
@@ -460,18 +460,18 @@ public class ElevatorGame extends Application {
                 elevator.enter(temp, personTarget);
                 lastPersonInTheElevatorText.setText(personName);
                 lastPersonTargetText.setText(Integer.toString(personTarget));
-                informationMessageArea.setText(informationMessageArea.getText() + personName + " has entered the elevator.\n");
+                informationMessageArea.appendText(personName + " has entered the elevator.\n");
 
             } else {
 
                 if (elevator.getPeople().getSize() == elevator.getCapacity()) {
-                    informationMessageArea.setText(informationMessageArea.getText() + "Elevator is full.\n");
+                    informationMessageArea.appendText("Elevator is full.\n");
 
                 } else {
                     lastPersonInTheElevatorText.setText(personName);
                     elevator.enter(temp, personTarget);
                     lastPersonTargetText.setText(Integer.toString(personTarget));
-                    informationMessageArea.setText(informationMessageArea.getText() + personName + " has entered the elevator.\n");
+                    informationMessageArea.appendText(personName + " has entered the elevator.\n");
                 }
 
             }
