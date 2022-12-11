@@ -124,37 +124,41 @@ public class ElevatorGame extends Application {
 
     }
 
-    Elevator elevator;
+    Elevator elevator;  // elevator ADT
+    ImageView elevatorImage;    // image of the elevator in the app
 
-    Button darkModeButton;
-    Button haveFunButton;
-    Pane mainBackground = new Pane();
-    Label informationMessageLabel;
-    TextArea informationMessageArea;
-    ImageView buildingImage;
-    ImageView elevatorImage;
-    Label lastPersonInTheElevatorLabel;
-    TextField lastPersonInTheElevatorText;
+    Button darkModeButton;  // button to switch between dark and light mode
+    Button haveFunButton;   // ύ񥦘󥤖ҵ⼍񘄻ӛƺږ䕕쇑찘輥뇸肟泦勺ꠥ
+    Pane mainBackground = new Pane();   // container of the all GUI elements
+    Label informationMessageLabel;  // label to specify information message area
+    TextArea informationMessageArea;    // area to print information messages
+    ImageView buildingImage;    // image of the building in the app
 
-    Label elevatorStatusLabel;
-    Label lastPersonTargetLabel;
-    TextField currentFloorText;
-    TextField lastPersonTargetText;
+    Label lastPersonInTheElevatorLabel; // label to specify the textfield of the
+                                        // person available to get out
+    TextField lastPersonInTheElevatorText;  // area to print person to get out
 
-    Label elevatorControlsLabel;
-    ImageView elevatorUpButtonImage;
-    Button elevatorUpButton;
-    ImageView elevatorDownButtonImage;
-    Button elevatorDownButton;
-    TextField newPersonNameText;
-    TextField newPersonTargetText;
-    Button addNewPersonButton;
-    Scene mainLayout;
+    Label elevatorStatusLabel;  // label to specify section of the elevator status
+    Label lastPersonTargetLabel;    // target floor of the person who is going
+                                    // to get out
+    TextField currentFloorText; // textfield of the where elevator at
+    TextField lastPersonTargetText; // textfield of the person available to
+                                    // get out
 
-    Label newPersonFieldsLabel;
+    Label elevatorControlsLabel;    // label of the elevator buttons
+    ImageView elevatorUpButtonImage;    // image of the up elevator button
+    Button elevatorUpButton;    // up button of the elevator
+    ImageView elevatorDownButtonImage;  // image of the down elevator button
+    Button elevatorDownButton;  // down button of the elevator
+    TextField newPersonNameText;    // name of the new person to add
+    TextField newPersonTargetText;  // target of the new person to add
+    Button addNewPersonButton;  // button to add new person
+    Scene mainLayout;   // outer layout
+    Label newPersonFieldsLabel; // label that specifies new person infos
 
-    double betweenFloorSpace = 128;
-    boolean isDark = false;
+    double betweenFloorSpace = 128; // space between floors in the building
+
+    boolean isDark = false; // is theme dark?
 
     int buttonWidth = 100;
 
@@ -165,18 +169,27 @@ public class ElevatorGame extends Application {
         darkModeButton.setLayoutX(470);
         darkModeButton.setLayoutY(20);
 
+        // if theme is dark, make it light
+        // if it is light do vice versa
         darkModeButton.setOnAction(e -> {
             if (!isDark) {
+                // fill the background with a custom color
                 mainBackground.setBackground(new Background(new BackgroundFill(new Color(0.176, 0.012, 0.231, 1), new CornerRadii(0), new Insets(0))));
+
+                // make all the texts white
                 lastPersonTargetLabel.setTextFill(Color.WHITE);
                 elevatorControlsLabel.setTextFill(Color.WHITE);
                 lastPersonInTheElevatorLabel.setTextFill(Color.WHITE);
                 informationMessageLabel.setTextFill(Color.WHITE);
                 newPersonFieldsLabel.setTextFill(Color.WHITE);
                 elevatorStatusLabel.setTextFill(Color.WHITE);
+
                 isDark = true;
             } else {
+                // fill the background with white color
                 mainBackground.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+
+                // make all the texts black
                 lastPersonTargetLabel.setTextFill(Color.BLACK);
                 elevatorControlsLabel.setTextFill(Color.BLACK);
                 lastPersonInTheElevatorLabel.setTextFill(Color.BLACK);
@@ -189,6 +202,8 @@ public class ElevatorGame extends Application {
         });
 
     }
+
+    // a strange function with no meaning
     public void setHaveFunButton() {
         haveFunButton = new Button("Remove Ads");
         haveFunButton.setMaxWidth(buttonWidth);
@@ -196,6 +211,7 @@ public class ElevatorGame extends Application {
         haveFunButton.setLayoutX(darkModeButton.getLayoutX() + 120);
         haveFunButton.setLayoutY(darkModeButton.getLayoutY());
 
+        // crazy stuff
         haveFunButton.setOnAction(e -> {
             Timeline tm = new Timeline(new KeyFrame(Duration.millis(25), ep -> darkModeButton.fire()));
 
@@ -218,7 +234,7 @@ public class ElevatorGame extends Application {
     }
     public void setInformationMessageArea() {
         informationMessageArea = new TextArea();
-        informationMessageArea.setEditable(false);
+        informationMessageArea.setEditable(false);  // make it untouchable
         informationMessageArea.setLayoutX(informationMessageLabel.getLayoutX());
         informationMessageArea.setLayoutY(informationMessageLabel.getLayoutY() + 20);
         informationMessageArea.setMaxWidth(220);
@@ -228,6 +244,8 @@ public class ElevatorGame extends Application {
     }
 
     public void setBuildingImage() {
+
+        // fetch image from web
         String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/src/main/java/com/elevatorgame/elevatorgame/building.png";
         buildingImage = new ImageView(imagePath);
         buildingImage.setFitWidth(400);
@@ -236,6 +254,8 @@ public class ElevatorGame extends Application {
     }
 
     public void setElevatorImage() {
+
+        // fetch image from web
         String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/src/main/java/com/elevatorgame/elevatorgame/elevator.png";
         elevatorImage = new ImageView(imagePath);
         elevatorImage.setFitHeight(100);
@@ -313,6 +333,8 @@ public class ElevatorGame extends Application {
     }
 
     public void setElevatorUpButtonImage() {
+
+        // fetch image from web
         String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/src/main/java/com/elevatorgame/elevatorgame/up_arrow.png";
         elevatorUpButtonImage = new ImageView(imagePath);
         elevatorUpButtonImage.setFitWidth(30);
@@ -325,36 +347,53 @@ public class ElevatorGame extends Application {
         elevatorUpButton.setLayoutX(elevatorControlsLabel.getLayoutX() + 20);
         elevatorUpButton.setLayoutY(elevatorControlsLabel.getLayoutY() + 20);
 
+
+        // on click
         elevatorUpButton.setOnAction((e) -> {
+
+
+            // if elevator is not at the top floor
             if (elevator.getCurrentFloor() != elevator.getMaxFloor()) {
+
+                // move the elevator image to the upper floor
                 elevatorImage.setLayoutY(elevatorImage.getLayoutY() - betweenFloorSpace);
+                // move the floor counter
                 currentFloorText.setLayoutY(currentFloorText.getLayoutY() - betweenFloorSpace);
 
 
                 String lastPersonName;
                 boolean isEmpty = elevator.getPeople().isEmpty();
 
+                // if elevator is not empty
                 if (!isEmpty) {
+
+                    // get the name of the person who is going to get out possibly
                     ElevatorPerson ep = (ElevatorPerson)elevator.getPeople().peek();
                     lastPersonName = ep.getPerson().getName();
-                } else {
+
+                } else { // if elevator is empty
                     lastPersonName = "";
                 }
 
+                // get the number of the person in the elevator before and after
+                // moving to the next floor
                 int beforeCapacity = elevator.getPeople().getSize();
                 elevator.goToFloor(elevator.getCurrentFloor() + 1);
                 int afterCapacity = elevator.getPeople().getSize();
 
-
+                // check emptiness again for future use
                 isEmpty = elevator.getPeople().isEmpty();
-                if (afterCapacity != beforeCapacity) {
+
+                if (afterCapacity != beforeCapacity) { // if someone got out
                     informationMessageArea.appendText(lastPersonName + " is out.\n");
-                    if (isEmpty) {
+                    if (isEmpty) { // if elevator is empty now
                         informationMessageArea.appendText("Elevator is empty.\n");
                     }
                 }
 
 
+                // if elevator is not empty
+                // set the next available person to get out
                 if (!isEmpty) {
                     ElevatorPerson lastPerson = (ElevatorPerson)(elevator.getPeople().peek());
                     lastPersonInTheElevatorText.setText(lastPerson.getPerson().getName());
@@ -365,6 +404,7 @@ public class ElevatorGame extends Application {
                     lastPersonTargetText.setText("");
                 }
 
+                // update the current floor field on the application
                 currentFloorText.setText(Integer.toString(elevator.getCurrentFloor()));
             }
 
@@ -384,27 +424,38 @@ public class ElevatorGame extends Application {
         elevatorDownButton.setLayoutX(elevatorUpButton.getLayoutX());
         elevatorDownButton.setLayoutY(elevatorUpButton.getLayoutY() + 45);
 
+        // if elevator is not at the bottom floor
         elevatorDownButton.setOnAction((e) -> {
             if (elevator.getCurrentFloor() != elevator.getMinFloor()) {
+
+                // move the elevator image to the bottom floor
                 elevatorImage.setLayoutY(elevatorImage.getLayoutY() + betweenFloorSpace);
                 currentFloorText.setLayoutY(currentFloorText.getLayoutY() + betweenFloorSpace);
 
 
                 String lastPersonName;
                 boolean isEmpty = elevator.getPeople().isEmpty();
-                if (!isEmpty) {
+
+                // if elevator is not empty
+                if (!isEmpty) { // get the name of the person who is possibly going to get out
+
                     ElevatorPerson ep = (ElevatorPerson)elevator.getPeople().peek();
                     lastPersonName = ep.getPerson().getName();
-                } else {
+                } else { // if elevator is empty no one is going to get out next time
                     lastPersonName = "";
                 }
 
+                // get the number of the person in the elevator before and after
+                // moving to the next floor
                 int beforeCapacity = elevator.getPeople().getSize();
                 elevator.goToFloor(elevator.getCurrentFloor() - 1);
                 int afterCapacity = elevator.getPeople().getSize();
 
-
+                // check emptiness again for future use
                 isEmpty = elevator.getPeople().isEmpty();
+
+
+                // if someone has gotten out
                 if (afterCapacity != beforeCapacity) {
                     informationMessageArea.appendText(lastPersonName + " is out..\n");
                     if (isEmpty) {
@@ -412,7 +463,8 @@ public class ElevatorGame extends Application {
                     }
                 }
 
-
+                // if elevator is not empty
+                // set the next available person to get out
                 if (!isEmpty) {
                     ElevatorPerson lastPerson = (ElevatorPerson)(elevator.getPeople().peek());
                     lastPersonInTheElevatorText.setText(lastPerson.getPerson().getName());
@@ -459,18 +511,27 @@ public class ElevatorGame extends Application {
 
         addNewPersonButton.setOnAction((e) -> {
 
+            // get the name of the new person
             String personName = newPersonNameText.getText();
+
+            // target floor of the new person
             int personTarget;
+
+            // check for the correctness of the target floor prompt
             try {
                 Integer.parseInt(newPersonTargetText.getText());
-            } catch (Exception ep) {
+
+            } catch (Exception ep) { // if target floor is invalid
                 informationMessageArea.appendText("Invalid target floor!\n");
                 newPersonNameText.setText("");
                 newPersonTargetText.setText("");
                 return;
             }
+
+            // extract the target floor
             personTarget = Integer.parseInt(newPersonTargetText.getText());
 
+            // if target floor is out of bounds
             if (personTarget > elevator.getMaxFloor() || personTarget < elevator.getMinFloor()) {
                 informationMessageArea.appendText("Invalid target floor!\n");
                 newPersonNameText.setText("");
@@ -478,20 +539,24 @@ public class ElevatorGame extends Application {
                 return;
             }
 
+            // create a new person
             Person temp = new Person(personName);
 
+            // if elevator is empty add person into the elevator in
+            // a different manner
             if (elevator.getPeople().isEmpty()) {
                 elevator.enter(temp, personTarget);
                 lastPersonInTheElevatorText.setText(personName);
                 lastPersonTargetText.setText(Integer.toString(personTarget));
                 informationMessageArea.appendText(personName + " has entered the elevator.\n");
 
-            } else {
+            } else { // if elevator has some people in it
 
+                // if elevator is full
                 if (elevator.getPeople().getSize() == elevator.getCapacity()) {
                     informationMessageArea.appendText("Elevator is full.\n");
 
-                } else {
+                } else { // add the new person to the elevator
                     lastPersonInTheElevatorText.setText(personName);
                     elevator.enter(temp, personTarget);
                     lastPersonTargetText.setText(Integer.toString(personTarget));
