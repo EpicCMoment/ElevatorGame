@@ -44,14 +44,17 @@ public class ElevatorGame extends Application {
 
         Elevator elevator = new Elevator(4, 0, 5);
 
-        double betweenFloorSpace = 127;
+        double betweenFloorSpace = 128;
 
         Pane p = new Pane();
 
         TextField message = new TextField();
         message.setEditable(false);
-        message.setLayoutY(200);
-        message.setLayoutX(450);
+        message.setLayoutX(460);
+        message.setLayoutY(265);
+        message.setMaxWidth(210);
+        message.setMinWidth(210);
+
 
 
 
@@ -74,18 +77,20 @@ public class ElevatorGame extends Application {
         lastPersonText.setMaxWidth(90);
         lastPersonText.setMinWidth(90);
         lastPersonText.setEditable(false);
-        lastPersonText.setLayoutX(462);
-        lastPersonText.setLayoutY(350);
+        lastPersonText.setLayoutX(message.getLayoutX() + 120);
+        lastPersonText.setLayoutY(message.getLayoutY() + 60);
 
         // textfield that shows current floor elevator is sitting at
         TextField currentFloorText = new TextField();
         currentFloorText.setAlignment(Pos.CENTER);
         currentFloorText.setText("0");
-        currentFloorText.setMaxWidth(90);
-        currentFloorText.setMinWidth(90);
+        currentFloorText.setMaxWidth(25);
+        currentFloorText.setMinWidth(25);
+        currentFloorText.setMaxHeight(25);
+        currentFloorText.setMinHeight(25);
         currentFloorText.setEditable(false);
-        currentFloorText.setLayoutX(lastPersonText.getLayoutX());
-        currentFloorText.setLayoutY(lastPersonText.getLayoutY() + 30);
+        currentFloorText.setLayoutX(elevatorImage.getLayoutX() + 38);
+        currentFloorText.setLayoutY(elevatorImage.getLayoutY() + 5);
 
         // textfield that shows current floor elevator is sitting at
         TextField personNameText = new TextField();
@@ -94,7 +99,7 @@ public class ElevatorGame extends Application {
         personNameText.setMinWidth(90);
         personNameText.setEditable(false);
         personNameText.setLayoutX(lastPersonText.getLayoutX());
-        personNameText.setLayoutY(currentFloorText.getLayoutY() + 30);
+        personNameText.setLayoutY(lastPersonText.getLayoutY() + 30);
 
         ImageView upArrow = new ImageView("https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/ikinci_deneme/src/main/java/com/example/ikinci_deneme/up_arrow.png");
         upArrow.setFitWidth(30);
@@ -103,12 +108,14 @@ public class ElevatorGame extends Application {
         // up button
         Button upButton = new Button();
         upButton.setGraphic(upArrow);
-        upButton.setLayoutX(personNameText.getLayoutX() + 20);
-        upButton.setLayoutY(personNameText.getLayoutY() + 40);
+        upButton.setLayoutX(message.getLayoutX());
+        upButton.setLayoutY(message.getLayoutY() + 50);
+
 
         upButton.setOnAction((e) -> {
             if (elevator.getCurrentFloor() != elevator.getMaxFloor()) {
                 elevatorImage.setLayoutY(elevatorImage.getLayoutY() - betweenFloorSpace);
+                currentFloorText.setLayoutY(currentFloorText.getLayoutY() - betweenFloorSpace);
 
                 //Person pp = (Person)(elevator.getPeople().peek());
                 //String lastPersonName = pp.getName();
@@ -143,12 +150,12 @@ public class ElevatorGame extends Application {
         Button downButton = new Button();
         downButton.setGraphic(downArrow);
         downButton.setLayoutX(upButton.getLayoutX());
-        downButton.setLayoutY(upButton.getLayoutY() + 40);
+        downButton.setLayoutY(upButton.getLayoutY() + 45);
 
         downButton.setOnAction((e) -> {
             if (elevator.getCurrentFloor() != elevator.getMinFloor()) {
                 elevatorImage.setLayoutY(elevatorImage.getLayoutY() + betweenFloorSpace);
-
+                currentFloorText.setLayoutY(currentFloorText.getLayoutY() + betweenFloorSpace);
 
 
                 String lastPersonName;
@@ -178,8 +185,8 @@ public class ElevatorGame extends Application {
         // text field to get the new person's name
         TextField newPersonNameText = new TextField();
         newPersonNameText.setPromptText("Name");
-        newPersonNameText.setLayoutX(680);
-        newPersonNameText.setLayoutY(100);
+        newPersonNameText.setLayoutX(490);
+        newPersonNameText.setLayoutY(475);
 
         // text field to get the target floor of the new person
         TextField newPersonTargetText = new TextField();
@@ -189,7 +196,7 @@ public class ElevatorGame extends Application {
 
         // add the new person button
         Button addNewPersonButton = new Button("Add");
-        addNewPersonButton.setLayoutX(680);
+        addNewPersonButton.setLayoutX(newPersonNameText.getLayoutX());
         addNewPersonButton.setLayoutY(newPersonTargetText.getLayoutY() + 30);
         addNewPersonButton.setPrefWidth(147);
 
@@ -230,7 +237,7 @@ public class ElevatorGame extends Application {
         p.getChildren().add(message);
 
         // kind of main window controls :S
-        Scene sc = new Scene(p, 1000, 850);
+        Scene sc = new Scene(p, 700, 850);
 
 
         window.setResizable(false);
