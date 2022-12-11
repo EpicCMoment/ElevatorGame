@@ -19,6 +19,8 @@
     E-mail: you_shall_not_pass@middleearth.com
     Twitter: @baldGandalf
 
+    NOTE: IF YOU HAVE EPILEPSY DISORDER, DO NOT TOUCH THE REMOVE ADS BUTTON
+
  */
 
 
@@ -74,6 +76,8 @@ public class ElevatorGame extends Application {
 
 
         // below functions are self-explanatory
+
+        setGifImage();
 
         setBuildingImage();
 
@@ -133,6 +137,7 @@ public class ElevatorGame extends Application {
     Label informationMessageLabel;  // label to specify information message area
     TextArea informationMessageArea;    // area to print information messages
     ImageView buildingImage;    // image of the building in the app
+    ImageView gifImage;
 
     Label lastPersonInTheElevatorLabel; // label to specify the textfield of the
                                         // person available to get out
@@ -211,15 +216,14 @@ public class ElevatorGame extends Application {
         haveFunButton.setLayoutX(darkModeButton.getLayoutX() + 120);
         haveFunButton.setLayoutY(darkModeButton.getLayoutY());
 
-        // crazy stuff
         haveFunButton.setOnAction(e -> {
-            Timeline tm = new Timeline(new KeyFrame(Duration.millis(25), ep -> darkModeButton.fire()));
+            Timeline tm = new Timeline(new KeyFrame(Duration.millis(25), ep -> {darkModeButton.fire(); gifImage.setVisible(true);}));
+            informationMessageArea.setText("YOU SHALL NOT REMOVE THE ADS \nYOU SHALL NOT REMOVE THE ADS \nYOU SHALL NOT REMOVE THE ADS \nYOU SHALL NOT REMOVE THE ADS");
 
-            tm.setCycleCount(500);
+            tm.setCycleCount(350);
             tm.play();
-
+            tm.setOnFinished(r -> {informationMessageArea.setText(""); gifImage.setVisible(false);});
         });
-
     }
 
 
@@ -241,6 +245,16 @@ public class ElevatorGame extends Application {
         informationMessageArea.setMinWidth(220);
         informationMessageArea.setMaxHeight(100);
         informationMessageArea.setMinHeight(100);
+    }
+
+    public void setGifImage() {
+        String imagePath = "https://raw.githubusercontent.com/EpicCMoment/ElevatorGame/main/src/main/java/com/elevatorgame/elevatorgame/giphy.gif";
+        gifImage = new ImageView(imagePath);
+        gifImage.setFitWidth(280);
+        gifImage.setFitHeight(140);
+        gifImage.setLayoutX(450);
+        gifImage.setLayoutY(530);
+        gifImage.setVisible(false);
     }
 
     public void setBuildingImage() {
@@ -595,6 +609,7 @@ public class ElevatorGame extends Application {
         backgroundElements.add(elevatorStatusLabel);
         backgroundElements.add(darkModeButton);
         backgroundElements.add(haveFunButton);
+        backgroundElements.add(gifImage);
     }
 
     public void setMainLayout() {
@@ -612,6 +627,4 @@ public class ElevatorGame extends Application {
 
         mainWindow.setScene(mainLayout);
     }
-
-
 }
