@@ -1,7 +1,10 @@
 package com.elevatorgame.elevatorgame;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -11,10 +14,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import static javafx.application.Application.launch;
 
 public class ElevatorGame extends Application {
 
@@ -40,6 +48,8 @@ public class ElevatorGame extends Application {
 
         // don't change the order of the function calls below
         // if you are NOT SURE about what are you doing
+
+
 
         setBuildingImage();
 
@@ -76,10 +86,14 @@ public class ElevatorGame extends Application {
         setNewPersonTargetText();
         setAddNewPersonButton();
 
+        setDarkModeButton();
+        setHaveFunButton();
 
         setMainBackground();
+
         setMainLayout();
         setMainWindow(mainWindow);
+
 
 
         mainWindow.show();
@@ -88,7 +102,10 @@ public class ElevatorGame extends Application {
     }
 
     Elevator elevator;
-    Pane mainBackground;
+
+    Button darkModeButton;
+    Button haveFunButton;
+    Pane mainBackground = new Pane();
     Label informationMessageLabel;
     TextArea informationMessageArea;
     ImageView buildingImage;
@@ -114,7 +131,59 @@ public class ElevatorGame extends Application {
     Label newPersonFieldsLabel;
 
     double betweenFloorSpace = 128;
+    boolean isDark = false;
 
+    int buttonWidth = 100;
+
+    public void setDarkModeButton() {
+        darkModeButton = new Button("Change Theme");
+        darkModeButton.setMaxWidth(buttonWidth);
+        darkModeButton.setMinWidth(buttonWidth);
+        darkModeButton.setLayoutX(470);
+        darkModeButton.setLayoutY(20);
+
+        darkModeButton.setOnAction(e -> {
+            if (!isDark) {
+                mainBackground.setBackground(new Background(new BackgroundFill(new Color(0.176, 0.012, 0.231, 1), new CornerRadii(0), new Insets(0))));
+                lastPersonTargetLabel.setTextFill(Color.WHITE);
+                elevatorControlsLabel.setTextFill(Color.WHITE);
+                lastPersonInTheElevatorLabel.setTextFill(Color.WHITE);
+                informationMessageLabel.setTextFill(Color.WHITE);
+                newPersonFieldsLabel.setTextFill(Color.WHITE);
+                elevatorStatusLabel.setTextFill(Color.WHITE);
+                isDark = true;
+            } else {
+                mainBackground.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0), new Insets(0))));
+                lastPersonTargetLabel.setTextFill(Color.BLACK);
+                elevatorControlsLabel.setTextFill(Color.BLACK);
+                lastPersonInTheElevatorLabel.setTextFill(Color.BLACK);
+                informationMessageLabel.setTextFill(Color.BLACK);
+                newPersonFieldsLabel.setTextFill(Color.BLACK);
+                elevatorStatusLabel.setTextFill(Color.BLACK);
+
+                isDark = false;
+            }
+        });
+
+    }
+    public void setHaveFunButton() {
+        haveFunButton = new Button("Remove Ads");
+        haveFunButton.setMaxWidth(buttonWidth);
+        haveFunButton.setMinWidth(buttonWidth);
+        haveFunButton.setLayoutX(darkModeButton.getLayoutX() + 120);
+        haveFunButton.setLayoutY(darkModeButton.getLayoutY());
+
+        haveFunButton.setOnAction(e -> {
+            Timeline tm = new Timeline(new KeyFrame(Duration.millis(25), ep -> {
+                darkModeButton.fire();
+            }));
+
+            tm.setCycleCount(500);
+            tm.play();
+
+        });
+
+    }
 
 
     public void setElevator() {
@@ -123,7 +192,7 @@ public class ElevatorGame extends Application {
 
     private void setInformationMessageLabel() {
         informationMessageLabel = new Label("Information messages");
-        informationMessageLabel.setLayoutX(450);
+        informationMessageLabel.setLayoutX(480);
         informationMessageLabel.setLayoutY(680);
     }
     public void setInformationMessageArea() {
@@ -258,9 +327,9 @@ public class ElevatorGame extends Application {
 
                 isEmpty = elevator.getPeople().isEmpty();
                 if (afterCapacity != beforeCapacity) {
-                    informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is fucked off.\n");
+                    informationMessageArea.appendText(lastPersonName + " is fucked off.\n");
                     if (isEmpty) {
-                        informationMessageArea.setText(informationMessageArea.getText() + "Elevator is empty.\n");
+                        informationMessageArea.appendText(informationMessageArea.getText() + "Elevator is empty.\n");
                     }
                 }
 
@@ -316,9 +385,9 @@ public class ElevatorGame extends Application {
 
                 isEmpty = elevator.getPeople().isEmpty();
                 if (afterCapacity != beforeCapacity) {
-                    informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is fucked off.\n");
+                    informationMessageArea.appendText(lastPersonName + " is fucked off.\n");
                     if (isEmpty) {
-                        informationMessageArea.setText(informationMessageArea.getText() + "Elevator is empty.\n");
+                        informationMessageArea.appendText("Elevator is empty.\n");
                     }
                 }
 
@@ -366,14 +435,15 @@ public class ElevatorGame extends Application {
         addNewPersonButton.setLayoutY(newPersonTargetText.getLayoutY() + 30);
         addNewPersonButton.setPrefWidth(147);
 
+
         addNewPersonButton.setOnAction((e) -> {
 
             String personName = newPersonNameText.getText();
             int personTarget;
             try {
-                personTarget = Integer.parseInt(newPersonTargetText.getText());
+                Integer.parseInt(newPersonTargetText.getText());
             } catch (Exception ep) {
-                informationMessageArea.setText(informationMessageArea.getText() + "Invalid target floor!\n");
+                informationMessageArea.appendText("Invalid target floor!\n");
                 newPersonNameText.setText("");
                 newPersonTargetText.setText("");
                 return;
@@ -381,7 +451,7 @@ public class ElevatorGame extends Application {
             personTarget = Integer.parseInt(newPersonTargetText.getText());
 
             if (personTarget > elevator.getMaxFloor() || personTarget < elevator.getMinFloor()) {
-                informationMessageArea.setText(informationMessageArea.getText() + "Invalid target floor!\n");
+                informationMessageArea.appendText("Invalid target floor!\n");
                 newPersonNameText.setText("");
                 newPersonTargetText.setText("");
                 return;
@@ -393,15 +463,15 @@ public class ElevatorGame extends Application {
                 elevator.enter(temp, personTarget);
                 lastPersonInTheElevatorText.setText(personName);
                 lastPersonTargetText.setText(Integer.toString(personTarget));
-                informationMessageArea.setText(informationMessageArea.getText() + personName + " has entered the elevator.\n");
+                informationMessageArea.appendText(personName + " has entered the elevator.\n");
             } else {
                 if (elevator.getPeople().getSize() == elevator.getCapacity()) {
-                    informationMessageArea.setText(informationMessageArea.getText() +  "Elevator is full.\n");
+                    informationMessageArea.appendText("Elevator is full.\n");
                 } else {
                     lastPersonInTheElevatorText.setText(personName);
                     elevator.enter(temp, personTarget);
                     lastPersonTargetText.setText(Integer.toString(personTarget));
-                    informationMessageArea.setText(informationMessageArea.getText() + personName + " has entered the elevator.\n");
+                    informationMessageArea.appendText(personName + " has entered the elevator.\n");
                 }
 
             }
@@ -413,7 +483,8 @@ public class ElevatorGame extends Application {
     }
 
     public void setMainBackground() {
-        mainBackground = new Pane();
+        // make dark mode
+
         ObservableList<Node> backgroundElements = mainBackground.getChildren();
 
         backgroundElements.add(buildingImage);
@@ -433,10 +504,14 @@ public class ElevatorGame extends Application {
         backgroundElements.add(informationMessageLabel);
         backgroundElements.add(elevatorControlsLabel);
         backgroundElements.add(elevatorStatusLabel);
+        backgroundElements.add(darkModeButton);
+        backgroundElements.add(haveFunButton);
     }
 
     public void setMainLayout() {
         mainLayout = new Scene(mainBackground, 750, 850);
+
+
     }
 
     public void setMainWindow(Stage mainWindow) {
