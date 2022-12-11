@@ -242,7 +242,9 @@ public class ElevatorGame extends Application {
 
 
                 String lastPersonName;
-                if (!elevator.getPeople().isEmpty()) {
+                boolean isEmpty = elevator.getPeople().isEmpty();
+
+                if (!isEmpty) {
                     ElevatorPerson ep = (ElevatorPerson)elevator.getPeople().peek();
                     lastPersonName = ep.getPerson().getName();
                 } else {
@@ -253,8 +255,24 @@ public class ElevatorGame extends Application {
                 elevator.goToFloor(elevator.getCurrentFloor() + 1);
                 int afterCapacity = elevator.getPeople().getSize();
 
+
+                isEmpty = elevator.getPeople().isEmpty();
                 if (afterCapacity != beforeCapacity) {
                     informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is fucked off.\n");
+                    if (isEmpty) {
+                        informationMessageArea.setText(informationMessageArea.getText() + "Elevator is empty.\n");
+                    }
+                }
+
+
+                if (!isEmpty) {
+                    ElevatorPerson lastPerson = (ElevatorPerson)(elevator.getPeople().peek());
+                    lastPersonInTheElevatorText.setText(lastPerson.getPerson().getName());
+                    lastPersonTargetText.setText(Integer.toString(lastPerson.getTarget()));
+                } else {
+
+                    lastPersonInTheElevatorText.setText("");
+                    lastPersonTargetText.setText("");
                 }
 
                 currentFloorText.setText(Integer.toString(elevator.getCurrentFloor()));
@@ -283,7 +301,8 @@ public class ElevatorGame extends Application {
 
 
                 String lastPersonName;
-                if (!elevator.getPeople().isEmpty()) {
+                boolean isEmpty = elevator.getPeople().isEmpty();
+                if (!isEmpty) {
                     ElevatorPerson ep = (ElevatorPerson)elevator.getPeople().peek();
                     lastPersonName = ep.getPerson().getName();
                 } else {
@@ -294,11 +313,27 @@ public class ElevatorGame extends Application {
                 elevator.goToFloor(elevator.getCurrentFloor() - 1);
                 int afterCapacity = elevator.getPeople().getSize();
 
+
+                isEmpty = elevator.getPeople().isEmpty();
                 if (afterCapacity != beforeCapacity) {
-                    informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is fucked off.\n" + informationMessageArea);
+                    informationMessageArea.setText(informationMessageArea.getText() + lastPersonName + " is fucked off.\n");
+                    if (isEmpty) {
+                        informationMessageArea.setText(informationMessageArea.getText() + "Elevator is empty.\n");
+                    }
+                }
+
+
+                if (!isEmpty) {
+                    ElevatorPerson lastPerson = (ElevatorPerson)(elevator.getPeople().peek());
+                    lastPersonInTheElevatorText.setText(lastPerson.getPerson().getName());
+                    lastPersonTargetText.setText(Integer.toString(lastPerson.getTarget()));
+                } else {
+                    lastPersonInTheElevatorText.setText("");
+                    lastPersonTargetText.setText("");
                 }
 
                 currentFloorText.setText(Integer.toString(elevator.getCurrentFloor()));
+
 
             }
 
@@ -307,7 +342,7 @@ public class ElevatorGame extends Application {
 
     private void setNewPersonFieldsLabel() {
         newPersonFieldsLabel = new Label("Add a new person");
-        newPersonFieldsLabel.setLayoutX(477);
+        newPersonFieldsLabel.setLayoutX(510);
         newPersonFieldsLabel.setLayoutY(120);
     }
 
@@ -334,17 +369,39 @@ public class ElevatorGame extends Application {
         addNewPersonButton.setOnAction((e) -> {
 
             String personName = newPersonNameText.getText();
-            int personTarget = Integer.parseInt(newPersonTargetText.getText());
+            int personTarget;
+            try {
+                personTarget = Integer.parseInt(newPersonTargetText.getText());
+            } catch (Exception ep) {
+                informationMessageArea.setText(informationMessageArea.getText() + "Invalid target floor!\n");
+                newPersonNameText.setText("");
+                newPersonTargetText.setText("");
+                return;
+            }
+            personTarget = Integer.parseInt(newPersonTargetText.getText());
+
+            if (personTarget > elevator.getMaxFloor() || personTarget < elevator.getMinFloor()) {
+                informationMessageArea.setText(informationMessageArea.getText() + "Invalid target floor!\n");
+                newPersonNameText.setText("");
+                newPersonTargetText.setText("");
+                return;
+            }
+
             Person temp = new Person(personName);
 
             if (elevator.getPeople().isEmpty()) {
                 elevator.enter(temp, personTarget);
                 lastPersonInTheElevatorText.setText(personName);
+                lastPersonTargetText.setText(Integer.toString(personTarget));
+                informationMessageArea.setText(informationMessageArea.getText() + personName + " has entered the elevator.\n");
             } else {
                 if (elevator.getPeople().getSize() == elevator.getCapacity()) {
-                    informationMessageArea.setText("Elevator is full.");
+                    informationMessageArea.setText(informationMessageArea.getText() +  "Elevator is full.\n");
                 } else {
+                    lastPersonInTheElevatorText.setText(personName);
                     elevator.enter(temp, personTarget);
+                    lastPersonTargetText.setText(Integer.toString(personTarget));
+                    informationMessageArea.setText(informationMessageArea.getText() + personName + " has entered the elevator.\n");
                 }
 
             }
