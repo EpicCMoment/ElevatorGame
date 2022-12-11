@@ -14,7 +14,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -174,9 +173,7 @@ public class ElevatorGame extends Application {
         haveFunButton.setLayoutY(darkModeButton.getLayoutY());
 
         haveFunButton.setOnAction(e -> {
-            Timeline tm = new Timeline(new KeyFrame(Duration.millis(25), ep -> {
-                darkModeButton.fire();
-            }));
+            Timeline tm = new Timeline(new KeyFrame(Duration.millis(25), ep -> darkModeButton.fire()));
 
             tm.setCycleCount(500);
             tm.play();
