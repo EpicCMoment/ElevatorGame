@@ -1,3 +1,27 @@
+/*
+
+    GROUP HOMEWORK - ELEVATOR GAME
+
+    Description: This is a small elevator game designed for CENG201 Object Oriented
+    Programming assignment. Every aspect of this app is self-explanatory. Buttons
+    and text fields are placed carefully to improve user experience. Have fun!
+
+    Contributors:
+    Arif Fil, 20050111037
+    Zehra İnöz, 20050111019
+    Beyhan Kandemir, 20050111051
+    Arda Şafak Parlar, 20050111043
+    Sertac İnce, 20050111003
+
+    Contacts:
+
+    Github: https://github.com/EpicCMoment/ElevatorGame
+    E-mail: you_shall_not_pass@middleearth.com
+    Twitter: @baldGandalf
+
+ */
+
+
 package com.elevatorgame.elevatorgame;
 
 import javafx.animation.KeyFrame;
@@ -49,6 +73,7 @@ public class ElevatorGame extends Application {
         // if you are NOT SURE about what are you doing
 
 
+        // below functions are self-explanatory
 
         setBuildingImage();
 
@@ -75,8 +100,6 @@ public class ElevatorGame extends Application {
         setElevatorStatusLabel();
 
 
-
-
         setElevatorDownButtonImage();
         setElevatorDownButton();
 
@@ -95,6 +118,7 @@ public class ElevatorGame extends Application {
 
 
 
+        // run the actual GUI
         mainWindow.show();
 
 
