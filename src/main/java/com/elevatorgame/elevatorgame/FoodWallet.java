@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;//Abdullah Bülbül
+package com.elevatorgame.elevatorgame;//Abdullah Bülbül
 //FoodWallet Class for CENG201 TakeHome Quiz
 
 /**

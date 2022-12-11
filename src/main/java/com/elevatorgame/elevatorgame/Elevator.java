@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;/*
+package com.elevatorgame.elevatorgame;/*
  * Description: Elevator class provides an un-convenient way to transport.
  * People get in and struggle to get out most of the time however if they don't want to
  * use stairs for 8 floors, that is the only chance. Could save some ElevatorPersons some day.

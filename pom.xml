@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>ikinci_deneme</artifactId>
+    <groupId>com.ElevatorGame</groupId>
+    <artifactId>ElevatorGame</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ikinci_deneme</name>
+    <name>ElevatorGame</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,7 +60,8 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.ikinci_deneme/com.example.ikinci_deneme.HelloApplication</mainClass>
+                            <mainClass>com.elevatorgame.elevatorgame/com.elevatorgame.elevatorgame.HelloApplication
+                            </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;//Abdullah Bülbül, CENG201
+package com.elevatorgame.elevatorgame;//Abdullah Bülbül, CENG201
 //Stack example from the course book, uses an arraylist
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;/*
+package com.elevatorgame.elevatorgame;/*
  * Description: ElevatorPerson class provides persons to put into an elevator.
  * Stores some useful information about underlying person and the floor variables.
  * Could be saved by an elevator someday...

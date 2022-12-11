@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;
+package com.elevatorgame.elevatorgame;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -310,7 +310,6 @@ public class ElevatorGame extends Application {
 
         mainWindow.setScene(mainLayout);
     }
-
 
 
 }

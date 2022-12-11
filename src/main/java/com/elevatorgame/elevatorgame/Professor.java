@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;
+package com.elevatorgame.elevatorgame;
 
 //Abdullah Bülbül, CENG201
 public class Professor extends Person {

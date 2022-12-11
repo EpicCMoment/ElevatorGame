@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ElevatorGame.iml" filepath="$PROJECT_DIR$/.idea/ElevatorGame.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ikinci_deneme/ikinci_deneme.iml" filepath="$PROJECT_DIR$/ikinci_deneme/ikinci_deneme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ElevatorGame.iml" filepath="$PROJECT_DIR$/ElevatorGame.iml" />
     </modules>
   </component>
 </project>

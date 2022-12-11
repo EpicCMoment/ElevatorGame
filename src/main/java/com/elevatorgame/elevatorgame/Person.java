@@ -1,4 +1,4 @@
-package com.example.ikinci_deneme;/*
+package com.elevatorgame.elevatorgame;/*
 @author Abdullah Bülbül
 Ceng201 - OOP - Quiz 3
  */
