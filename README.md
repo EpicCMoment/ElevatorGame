@@ -1,7 +1,7 @@
 # ElevatorGame
-A tiny, useless elevator game designed and programmed for getting high grades from CENG201-Object Oriented Programming course.
+A tiny, un-fun elevator game designed and programmed for getting high grades from CENG201-Object Oriented Programming lecture.
 
-# Note: If you have any sign of epilepsy disease, please DON'T CLICK ON THE "Remove Ads button"
+# Note: If you have any sign of epilepsy disease, please DON'T CLICK TO THE "Remove Ads button"
 
 ## Compile and Run:
 
