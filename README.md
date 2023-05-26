@@ -1,6 +1,6 @@
 # ElevatorGame
 
-![yetoaskoimar](https://github.com/EpicCMoment/ElevatorGame/assets/74237094/66807452-6547-4a6f-a53b-89ff1427337f)
+![yetoaskoimar (Küçük)](https://github.com/EpicCMoment/ElevatorGame/assets/74237094/018e19d4-2f82-4499-922c-91d3380a6f15)
 
 A tiny, un-fun elevator game designed and programmed for getting high grades from CENG201-Object Oriented Programming lecture.
 
